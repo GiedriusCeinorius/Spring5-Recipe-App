@@ -1,0 +1,33 @@
+package guru.springframework.repositories;
+
+import guru.springframework.domain.UnitOfMeasure;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.data.jdbc.DataJdbcTest;
+import org.springframework.test.context.junit4.SpringRunner;
+
+import java.util.Optional;
+
+import static org.junit.Assert.*;
+
+@RunWith(SpringRunner.class)
+@DataJdbcTest
+public class UnitOfMeasureRepositoryIT {
+
+
+    @Autowired
+    UnitOfMeasureRepository unitOfMeasureRepository;
+
+    @Before
+    public void setUp() throws Exception {
+    }
+
+    @Test
+    public void findByDescription() {
+        Optional<UnitOfMeasure> byDescription = unitOfMeasureRepository.findByDescription("Teaspoon");
+
+        assertEquals("Teaspoon", byDescription.get().getDescription());
+    }
+}
